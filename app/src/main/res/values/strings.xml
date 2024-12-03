@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProyectoPGL</string>
+    <string name="toast_text">Click en el CardView: %1$s</string>
 </resources>

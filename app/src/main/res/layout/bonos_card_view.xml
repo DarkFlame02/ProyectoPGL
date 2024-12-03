@@ -6,7 +6,7 @@
     android:layout_height="100dp"
     android:elevation="16dp"
     android:layout_margin="4dp"
-    android:id="@+id/cardView">
+    android:id="@+id/bonosCardView">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -18,36 +18,36 @@
             android:layout_height="90dp"
             android:layout_marginStart="16dp"
             android:layout_marginEnd="32dp"
-            android:contentDescription="Imagen bono"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toStartOf="@+id/hotelTitle"
+            app:layout_constraintEnd_toStartOf="@+id/bonosTitle"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            tools:srcCompat="@tools:sample/avatars" />
+            tools:srcCompat="@drawable/imagen1" />
 
         <TextView
-            android:id="@+id/hotelTitle"
+            android:id="@+id/bonosTitle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="28dp"
-            android:layout_marginTop="16dp"
-            android:textSize="20sp"
-            android:text=""
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:maxEms="15"
+            android:maxLines="2"
+            android:textSize="16sp"
+            app:autoSizeTextType="uniform"
             app:layout_constraintStart_toEndOf="@+id/bonosImage"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/hotelDesc"
+            android:id="@+id/bonosDesc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="9dp"
-            android:layout_marginEnd="214dp"
-            android:layout_marginBottom="42dp"
-            android:text=""
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:maxEms="16"
+            android:maxLines="2"
+            app:autoSizeTextType="uniform"
             app:layout_constraintStart_toEndOf="@+id/bonosImage"
-            app:layout_constraintTop_toBottomOf="@+id/hotelTitle" />
+            app:layout_constraintTop_toBottomOf="@+id/bonosTitle" />
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="nombreBonos">
+        <item>Circuito Spa para 2 con buffet y masaje relajante(27,90€)</item>
+        <item>Brunch Isla Baja para 2  en el Mirador de Garachico(34,90€)</item>
+        <item>Excursión en Catamarán con almuerzo(44,90€)</item>
+        <item>Brunch sobre el mar para 2 en El Médano(29,90€)</item>
+        <item>Brunch Lido con vistas al mar para 2 en el Lago Martiánez(31,90€)</item>
+        <item>Circuito Termal Rock Spa de lujo con buffet(49€)</item>
+    </string-array>
+</resources>

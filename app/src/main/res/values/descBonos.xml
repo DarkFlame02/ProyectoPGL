@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="descBonos">
+        <item>Relájate con un circuito spa, masaje y buffet gourmet.</item>
+        <item>Disfruta de un brunch exquisito con vistas panorámicas a Garachico.</item>
+        <item>Navega por aguas cristalinas y saborea un almuerzo a bordo.</item>
+        <item>Un delicioso brunch en un entorno único junto al mar.</item>
+        <item>Vive una experiencia culinaria con vistas impresionantes al océano.</item>
+        <item>Rejuvenece en un spa exclusivo y disfruta de un buffet delicioso.</item>
+    </string-array>
+</resources>

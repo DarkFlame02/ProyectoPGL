@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activity.MainActivity">
+    tools:context=".activity.ReservasActivity">
 
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
@@ -18,7 +18,7 @@
             android:background="#2196F3"
             app:titleTextColor="@color/white"
             android:elevation="4dp"
-            app:title="Bonos" />
+            app:title="Reservas" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
