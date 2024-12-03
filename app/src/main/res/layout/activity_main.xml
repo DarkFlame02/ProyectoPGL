@@ -19,12 +19,12 @@
             android:background="?attr/colorPrimary"
             app:titleTextColor="@color/white"
             android:elevation="4dp"
-            app:title="Restaurantes" />
+            app:title="Bonos" />
 
     </com.google.android.material.appbar.AppBarLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerView"
+        android:id="@+id/listaBonosRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginTop="?attr/actionBarSize" />
