@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopgl.R
 
-class BonoAdapter(private val nombreBonos: List<String>, private val descBonos: List<String>, private val imagenBonos: Array<Int>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<BonoAdapter.BonoViewHolder>() {
+class BonoAdapter(private val nombreBonos: List<String>, private val descBonos: List<String>, private val imagenBonos: Array<Int>, private val onItemClick: (String, String, Int) -> Unit) : RecyclerView.Adapter<BonoAdapter.BonoViewHolder>() {
 
     class BonoViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val card: CardView = item.findViewById(R.id.bonosCardView)
@@ -29,7 +29,9 @@ class BonoAdapter(private val nombreBonos: List<String>, private val descBonos: 
         holder.bonoNombre.text = nombreBonos[position]
         holder.bonoDesc.text = descBonos[position]
         holder.bonoImage.setImageResource(imagenBonos[position])
-        holder.card.setOnClickListener { onItemClick(position) }
+
+        holder.card.setOnClickListener {
+            onItemClick(nombreBonos[position], descBonos[position], imagenBonos[position]) }
     }
 
 }
