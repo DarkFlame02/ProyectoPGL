@@ -7,25 +7,40 @@
     android:layout_height="match_parent"
     tools:context=".activity.ReservasActivity">
 
-    <com.google.android.material.appbar.AppBarLayout
+    <androidx.drawerlayout.widget.DrawerLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="match_parent">
 
-        <androidx.appcompat.widget.Toolbar
-            android:id="@+id/toolbar"
+        <com.google.android.material.appbar.AppBarLayout
             android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="#2196F3"
-            app:titleTextColor="@color/white"
-            android:elevation="4dp"
-            app:title="Reservas" />
+            android:layout_height="wrap_content">
 
-    </com.google.android.material.appbar.AppBarLayout>
+            <androidx.appcompat.widget.Toolbar
+                android:id="@+id/toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:background="#2196F3"
+                app:titleTextColor="@color/white"
+                android:elevation="4dp"
+                app:title="Reservas" />
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listaRecyclerView"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?attr/actionBarSize" />
+        </com.google.android.material.appbar.AppBarLayout>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listaRecyclerView"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="?attr/actionBarSize" />
+
+        <com.google.android.material.navigation.NavigationView
+            android:id="@+id/navigation_view"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="start"
+            android:fitsSystemWindows="true"
+            app:menu="@menu/drawer_menu"
+            app:headerLayout="@layout/drawer_header" />
+
+    </androidx.drawerlayout.widget.DrawerLayout>
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
