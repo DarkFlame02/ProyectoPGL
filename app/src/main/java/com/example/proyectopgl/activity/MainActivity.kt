@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -65,21 +64,17 @@ class MainActivity : AppCompatActivity() {
         rcv.layoutManager = LinearLayoutManager(this)
 
         // Pasamos los nombres, descripciones e imágenes al adaptador
-        adapter = BonoAdapter(listaNombres, listaDesc, listaImagen) { position ->
-            mostrarPos(position)
+        adapter = BonoAdapter(listaNombres, listaDesc, listaImagen) { nombre, desc, imagen ->
+            // Muestra los detalles del bono en una nueva actividad
+            val intent = Intent(this, DetallesActivity::class.java).apply {
+                putExtra("BONO_NOMBRE", nombre)
+                putExtra("BONO_DESC", desc)
+                putExtra("BONO_IMAGEN", imagen)
+            }
+            startActivity(intent)
         }
 
         rcv.adapter = adapter
-    }
-
-
-    // Método que se lanza al hacer click en uno de los elementos del listado
-    private fun mostrarPos(position: Int) {
-        Toast.makeText(
-            this,
-            getString(R.string.toast_text, listaNombres[position]),
-            Toast.LENGTH_LONG
-        ).show()
     }
 
     // Inflar el menú de opciones

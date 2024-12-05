@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopgl.R
 import com.example.proyectopgl.adapters.ReservasAdapter
 
-class ReservasActivity:AppCompatActivity() {
+class ReservasActivity : AppCompatActivity() {
 
     lateinit var rcv: RecyclerView
 
@@ -27,7 +27,6 @@ class ReservasActivity:AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
         setContentView(R.layout.activity_reservas)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -38,6 +37,7 @@ class ReservasActivity:AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        toolbar.setNavigationOnClickListener { finish() }
 
         initUi()
     }
