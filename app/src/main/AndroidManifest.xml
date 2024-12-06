@@ -27,6 +27,8 @@
         <activity
             android:name=".activity.DetallesActivity"
             android:exported="true" />
+        <activity android:name=".activity.FormularioActivity"
+            android:exported="true" />
 
     </application>
 

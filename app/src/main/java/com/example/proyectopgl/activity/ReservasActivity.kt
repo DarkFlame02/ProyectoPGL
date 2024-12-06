@@ -5,7 +5,6 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -14,16 +13,16 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopgl.R
 import com.example.proyectopgl.adapters.ReservasAdapter
+import com.example.proyectopgl.datos.ReservaRepository
 
 class ReservasActivity : AppCompatActivity() {
 
     lateinit var rcv: RecyclerView
-
     lateinit var adapter: ReservasAdapter
-
-    var listaDias = mutableListOf<String>()
+    var listaNombres = mutableListOf<String>()
     var listaFechas = mutableListOf<String>()
     var listaHoras = mutableListOf<String>()
+    var listaImagenes = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -37,42 +36,61 @@ class ReservasActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        toolbar.setNavigationOnClickListener { finish() }
+        toolbar.setNavigationOnClickListener {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish()
+        }
+
+        listaNombres = intent.getStringArrayListExtra("NOMBRES")?.toMutableList() ?: mutableListOf()
+        listaFechas = intent.getStringArrayListExtra("FECHAS")?.toMutableList() ?: mutableListOf()
+        listaHoras = intent.getStringArrayListExtra("HORAS")?.toMutableList() ?: mutableListOf()
 
         initUi()
+
     }
 
-    // Inicializamos todos nuestros componentes
     private fun initUi() {
         initDatos()
         initRecyclerView()
+        actualizarRecyclerView()
     }
 
-    // Asignamos los textos a la estructura de datos
     private fun initDatos() {
-        listaDias = resources.getStringArray(R.array.dias).toMutableList()
-        listaFechas = resources.getStringArray(R.array.fechas).toMutableList()
-        listaHoras = resources.getStringArray(R.array.horas).toMutableList()
+        val reservas = ReservaRepository.getReservas()
+        listaNombres.clear()
+        listaFechas.clear()
+        listaHoras.clear()
+        listaImagenes.clear()
+
+        reservas.forEach { reserva ->
+            listaNombres.add(reserva.nombre)
+            listaFechas.add(reserva.fecha)
+            listaHoras.add(reserva.hora)
+            listaImagenes.add(reserva.imagen)
+        }
     }
 
-    // Inicaliza el RecyclerView
     private fun initRecyclerView() {
         rcv = findViewById(R.id.listaRecyclerView)
         rcv.layoutManager = LinearLayoutManager(this)
 
-        // Pasamos los nombres, descripciones e imágenes al adaptador
-        adapter = ReservasAdapter(listaDias, listaFechas, listaHoras) { position ->
+        adapter = ReservasAdapter(listaNombres, listaFechas, listaHoras, listaImagenes) { position ->
             mostrarPos(position)
         }
 
         rcv.adapter = adapter
     }
 
+    private fun actualizarRecyclerView() {
+        adapter.notifyDataSetChanged()
+    }
+
     // Método que se lanza al hacer click en uno de los elementos del listado
     private fun mostrarPos(position: Int) {
         Toast.makeText(
             this,
-            getString(R.string.toast_text, listaFechas[position]),
+            getString(R.string.reserva, listaNombres[position], listaFechas[position], listaHoras[position]),
             Toast.LENGTH_LONG
         ).show()
     }
@@ -98,8 +116,8 @@ class ReservasActivity : AppCompatActivity() {
                 true
             }
             android.R.id.home -> {
-                // Manejo del botón de retroceso
-                onBackPressed()  // Esto cierra la actividad y vuelve a la anterior
+                val intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
                 true
             }
 

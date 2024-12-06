@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">ProyectoPGL</string>
     <string name="toast_text">Click en el CardView: %1$s</string>
+    <string name="reserva">Reserva de %1$s el dia %2$s a las %3$s</string>
+    <string name="formulario_de_reserva">Formulario de reserva</string>
+    <string name="nombre">Nombre</string>
+    <string name="apellidos">Apellidos</string>
+    <string name="correo_electr_nico">Correo electrónico</string>
+    <string name="fecha">Fecha</string>
+    <string name="hora">Hora</string>
+    <string name="confirmar">Confirmar</string>
+    <string name="campos_incompletos">Por favor, completa todos los campos.</string>
 </resources>

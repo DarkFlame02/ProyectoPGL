@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
-    <string-array name="dias">
-        <item>Lunes</item>
-        <item>Miercoles</item>
-        <item>Sabado</item>
-    </string-array>
-</resources>

@@ -25,7 +25,7 @@
             tools:srcCompat="@tools:sample/avatars" />
 
         <TextView
-            android:id="@+id/diaReservaText"
+            android:id="@+id/nombreReservaText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text=""

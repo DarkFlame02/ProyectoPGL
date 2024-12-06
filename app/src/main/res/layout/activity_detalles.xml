@@ -26,7 +26,6 @@
 
         </com.google.android.material.appbar.AppBarLayout>
 
-        <!-- Contenido estático que no se desplaza -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -59,9 +58,20 @@
                 android:textColor="@color/black" />
         </LinearLayout>
 
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/fab"
+            android:contentDescription="@string/app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="bottom|end"
+            android:backgroundTint="#2196F3"
+            app:tint="@color/white"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@android:drawable/ic_input_add" />
+
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 
-    <!-- Menú lateral -->
     <com.google.android.material.navigation.NavigationView
         android:id="@+id/navigation_view"
         android:layout_width="wrap_content"

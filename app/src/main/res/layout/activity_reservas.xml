@@ -30,7 +30,8 @@
             android:id="@+id/listaRecyclerView"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="?attr/actionBarSize" />
+            android:layout_marginTop="?attr/actionBarSize"
+            tools:listitem="@layout/reservas_card_view"/>
 
         <com.google.android.material.navigation.NavigationView
             android:id="@+id/navigation_view"
