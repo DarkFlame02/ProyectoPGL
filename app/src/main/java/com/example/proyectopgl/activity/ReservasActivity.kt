@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import androidx.core.view.ViewCompat
@@ -26,6 +27,7 @@ class ReservasActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_reservas)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -112,7 +114,7 @@ class ReservasActivity : AppCompatActivity() {
             }
             R.id.mnOp2 -> {
                 // Acciones para "Opción 1"
-                Toast.makeText(this, getString(R.string.toast_text), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.reservasmenu), Toast.LENGTH_SHORT).show()
                 true
             }
             android.R.id.home -> {

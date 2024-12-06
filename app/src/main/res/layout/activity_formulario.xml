@@ -11,11 +11,11 @@
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="?attr/actionBarSize"
         android:background="#2196F3"
+        app:titleTextColor="@color/white"
         android:elevation="4dp"
-        android:title="Formulario"
-        android:titleTextColor="@android:color/white" />
+        app:title="Formulario" />
 
         <RelativeLayout
             android:layout_width="match_parent"

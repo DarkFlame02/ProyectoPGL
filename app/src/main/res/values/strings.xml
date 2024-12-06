@@ -10,4 +10,8 @@
     <string name="hora">Hora</string>
     <string name="confirmar">Confirmar</string>
     <string name="campos_incompletos">Por favor, completa todos los campos.</string>
+    <string name="bonos">Bonos</string>
+    <string name="bonosmenu">Usted se encuentra en bonos</string>
+    <string name="reservas">Reservas</string>
+    <string name="reservasmenu">Usted se encuentra en reservas</string>
 </resources>

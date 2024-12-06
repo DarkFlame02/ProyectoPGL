@@ -34,6 +34,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        enableEdgeToEdge()
         setContentView(R.layout.activity_main)
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
@@ -88,7 +89,7 @@ class MainActivity : AppCompatActivity() {
         return when (item.itemId) {
             R.id.mnOp1 -> {
                 // Acciones para "Opción 1"
-                Toast.makeText(this, getString(R.string.toast_text), Toast.LENGTH_SHORT).show()
+                Toast.makeText(this, getString(R.string.bonosmenu), Toast.LENGTH_SHORT).show()
                 true
             }
             R.id.mnOp2 -> {

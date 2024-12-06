@@ -3,13 +3,13 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/mnOp1"
-        android:title="Bonos"
+        android:title="@string/bonos"
         android:orderInCategory="100"
         app:showAsAction="never">
     </item>
     <item
         android:id="@+id/mnOp2"
-        android:title="Reservas"
+        android:title="@string/reservas"
         android:orderInCategory="200"
         app:showAsAction="never"/>
 </menu>
