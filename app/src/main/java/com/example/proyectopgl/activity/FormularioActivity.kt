@@ -4,6 +4,7 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.content.Intent
 import android.os.Bundle
+import android.util.Patterns
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -15,11 +16,12 @@ import androidx.core.view.WindowInsetsCompat
 import com.example.proyectopgl.R
 import com.example.proyectopgl.datos.Reserva
 import com.example.proyectopgl.datos.ReservaRepository
+import java.text.SimpleDateFormat
 import java.util.*
 
 class FormularioActivity : AppCompatActivity() {
 
-    var imagenBono: Int = 0
+    private var imagenBono: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,7 +40,6 @@ class FormularioActivity : AppCompatActivity() {
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
 
-        // Obtener referencias a los elementos de la interfaz
         val editTextNombre: EditText = findViewById(R.id.editTextNombre)
         val editTextApellidos: EditText = findViewById(R.id.editTextApellidos)
         val editTextCorreo: EditText = findViewById(R.id.editTextCorreo)
@@ -46,7 +47,22 @@ class FormularioActivity : AppCompatActivity() {
         val buttonHora: Button = findViewById(R.id.buttonHora)
         val buttonConfirmar: Button = findViewById(R.id.buttonConfirmar)
 
-        // Configurar botón para seleccionar fecha
+        fun esFechaHoraValida(fecha: String, hora: String): Boolean {
+            val calendar = Calendar.getInstance()
+
+            val fechaHoraStr = "$fecha $hora"
+
+            val formato = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+
+            return try {
+                val fechaHora = formato.parse(fechaHoraStr)
+
+                fechaHora != null && fechaHora.after(calendar.time)
+            } catch (e: Exception) {
+                false
+            }
+        }
+
         buttonFecha.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -59,7 +75,6 @@ class FormularioActivity : AppCompatActivity() {
             }, year, month, day).show()
         }
 
-        // Configurar botón para seleccionar hora
         buttonHora.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -81,11 +96,21 @@ class FormularioActivity : AppCompatActivity() {
             if (nombre.isEmpty() || apellidos.isEmpty() || correo.isEmpty() ||
                 fecha == getString(R.string.fecha) || hora == getString(R.string.hora)) {
                 Toast.makeText(this, R.string.campos_incompletos, Toast.LENGTH_SHORT).show()
+            }
+            else if (nombre.isEmpty() || apellidos.isEmpty() || nombre.length < 2 || apellidos.length < 2) {
+                Toast.makeText(this, R.string.nombre_apellidos_invalidos, Toast.LENGTH_SHORT).show()
+            }
+            else if (!nombre.matches("[a-zA-Z\\s]+".toRegex()) || !apellidos.matches("[a-zA-Z\\s]+".toRegex())) {
+                Toast.makeText(this, R.string.nombre_apellidos_solo_letras, Toast.LENGTH_SHORT).show()
+            }
+            else if (!Patterns.EMAIL_ADDRESS.matcher(correo).matches()) {
+                Toast.makeText(this, R.string.email_invalido, Toast.LENGTH_SHORT).show()
+            }
+            else if (!esFechaHoraValida(fecha, hora)) {
+                Toast.makeText(this, R.string.fecha_hora_pasadas, Toast.LENGTH_SHORT).show()
             } else {
-                // Guarda en el repositorio, incluyendo la imagen
                 ReservaRepository.addReserva(Reserva(nombre, fecha, hora, imagenBono))
 
-                // Cambia de actividad
                 val intent = Intent(this, ReservasActivity::class.java)
                 startActivity(intent)
             }

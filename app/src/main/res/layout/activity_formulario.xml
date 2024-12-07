@@ -12,8 +12,6 @@
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
-        android:background="#2196F3"
-        app:titleTextColor="@color/white"
         android:elevation="4dp"
         app:title="Formulario" />
 
@@ -112,7 +110,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/fecha"
-                android:backgroundTint="#2196F3"
                 android:layout_below="@+id/textInputLayoutCorreo"
                 android:layout_marginStart="60dp"/>
 
@@ -121,7 +118,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/hora"
-                android:backgroundTint="#2196F3"
                 android:layout_below="@+id/textInputLayoutCorreo"
                 android:layout_marginStart="200dp"/>
 
@@ -130,7 +126,6 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/confirmar"
-                android:backgroundTint="#3F51B5"
                 android:layout_below="@+id/buttonFecha"
                 android:layout_marginTop="20dp"
                 android:layout_centerHorizontal="true"/>

@@ -9,7 +9,7 @@ import androidx.cardview.widget.CardView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.proyectopgl.R
 
-class ReservasAdapter(private val listaNombres: MutableList<String>, private val listaFechas: MutableList<String>, private val listaHoras: MutableList<String>, private val imagenes: List<Int>, private val onItemClick: (Int) -> Unit) : RecyclerView.Adapter<ReservasAdapter.ReservaViewHolder>() {
+class ReservasAdapter(private val listaNombres: MutableList<String>, private val listaFechas: MutableList<String>, private val listaHoras: MutableList<String>, private val imagenes: List<Int>, private val onItemClick: (Int) -> Unit, private val onLongClick: (Int) -> Unit) : RecyclerView.Adapter<ReservasAdapter.ReservaViewHolder>() {
 
     class ReservaViewHolder(item: View) : RecyclerView.ViewHolder(item) {
         val card: CardView = item.findViewById(R.id.reservasCardView)
@@ -31,7 +31,14 @@ class ReservasAdapter(private val listaNombres: MutableList<String>, private val
         holder.fechaReserva.text = listaFechas[position]
         holder.horaReserva.text = listaHoras[position]
         holder.imagen.setImageResource(imagenes[position])
+
         holder.card.setOnClickListener { onItemClick(position) }
+
+        holder.card.setOnLongClickListener {
+            onLongClick(position)
+            true
+        }
     }
+
 
 }

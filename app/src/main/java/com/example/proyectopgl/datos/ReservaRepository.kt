@@ -7,6 +7,10 @@ object ReservaRepository {
         reservas.add(reserva)
     }
 
+    fun eliminarReserva(position: Int) {
+        reservas.removeAt(position)
+    }
+
     fun getReservas(): List<Reserva> {
         return reservas
     }

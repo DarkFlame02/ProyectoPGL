@@ -18,12 +18,12 @@ import com.example.proyectopgl.datos.ReservaRepository
 
 class ReservasActivity : AppCompatActivity() {
 
-    lateinit var rcv: RecyclerView
-    lateinit var adapter: ReservasAdapter
-    var listaNombres = mutableListOf<String>()
-    var listaFechas = mutableListOf<String>()
-    var listaHoras = mutableListOf<String>()
-    var listaImagenes = mutableListOf<Int>()
+    private lateinit var rcv: RecyclerView
+    private lateinit var adapter: ReservasAdapter
+    private var listaNombres = mutableListOf<String>()
+    private var listaFechas = mutableListOf<String>()
+    private var listaHoras = mutableListOf<String>()
+    private var listaImagenes = mutableListOf<Int>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,18 +77,20 @@ class ReservasActivity : AppCompatActivity() {
         rcv = findViewById(R.id.listaRecyclerView)
         rcv.layoutManager = LinearLayoutManager(this)
 
-        adapter = ReservasAdapter(listaNombres, listaFechas, listaHoras, listaImagenes) { position ->
-            mostrarPos(position)
-        }
+        adapter = ReservasAdapter(
+            listaNombres, listaFechas, listaHoras, listaImagenes,
+            onItemClick = { position -> mostrarPos(position) },
+            onLongClick = { position -> showContextMenuForItem(position) }
+        )
 
         rcv.adapter = adapter
+
     }
 
     private fun actualizarRecyclerView() {
         adapter.notifyDataSetChanged()
     }
 
-    // Método que se lanza al hacer click en uno de los elementos del listado
     private fun mostrarPos(position: Int) {
         Toast.makeText(
             this,
@@ -97,23 +99,48 @@ class ReservasActivity : AppCompatActivity() {
         ).show()
     }
 
-    // Inflar el menú de opciones
+    private fun showContextMenuForItem(position: Int) {
+        val view = rcv.findViewHolderForAdapterPosition(position)?.itemView
+        val menu = android.widget.PopupMenu(this, view)
+        menu.menuInflater.inflate(R.menu.context_menu, menu.menu)
+
+        menu.setOnMenuItemClickListener { item ->
+            when (item.itemId) {
+                R.id.delete -> {
+                    eliminarReserva(position)
+                    true
+                }
+                else -> false
+            }
+        }
+
+        menu.show()
+    }
+
+    private fun eliminarReserva(position: Int) {
+        ReservaRepository.eliminarReserva(position)
+
+        initDatos()
+
+        adapter.notifyItemRemoved(position)
+
+        Toast.makeText(this, "Cita eliminada", Toast.LENGTH_SHORT).show()
+    }
+
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.option_menu, menu)
         return true
     }
 
-    // Manejar la selección de elementos del menú
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mnOp1 -> {
-                // Acciones para "Opción 1"
                 val intent = Intent(this, MainActivity::class.java)
                 startActivity(intent)
                 true
             }
             R.id.mnOp2 -> {
-                // Acciones para "Opción 1"
                 Toast.makeText(this, getString(R.string.reservasmenu), Toast.LENGTH_SHORT).show()
                 true
             }
