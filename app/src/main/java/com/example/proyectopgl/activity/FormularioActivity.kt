@@ -23,8 +23,6 @@ class FormularioActivity : AppCompatActivity() {
 
     private var imagenBono: Int = 0
 
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()

@@ -131,7 +131,7 @@ class ReservasActivity : AppCompatActivity() {
         ReservaRepository.eliminarReserva(position)
         initDatos()
         adapter.notifyItemRemoved(position)
-        Toast.makeText(this, "Cita eliminada", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Reserva eliminada", Toast.LENGTH_SHORT).show()
     }
 
     // Creo el menu de opciones
