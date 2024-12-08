@@ -18,13 +18,16 @@ class BonoAdapter(private val nombreBonos: List<String>, private val descBonos: 
         val bonoImage: ImageView = item.findViewById(R.id.bonosImage)
     }
 
+    // Infla el diseño del CardView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): BonoViewHolder {
         val bonosCardView = LayoutInflater.from(parent.context)
         return BonoViewHolder(bonosCardView.inflate(R.layout.bonos_card_view, parent, false))
     }
 
+    // Numero de elementos de la lista
     override fun getItemCount(): Int = nombreBonos.size
 
+    // Asocia los datos a cada CardView
     override fun onBindViewHolder(holder: BonoViewHolder, position: Int) {
         holder.bonoNombre.text = nombreBonos[position]
         holder.bonoDesc.text = descBonos[position]

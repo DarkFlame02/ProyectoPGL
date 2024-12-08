@@ -19,21 +19,26 @@ class ReservasAdapter(private val listaNombres: MutableList<String>, private val
         val imagen: ImageView = item.findViewById(R.id.reservaImage)
     }
 
+    // Infla el diseño del CardView
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ReservaViewHolder {
         val reservaCardView = LayoutInflater.from(parent.context)
         return ReservaViewHolder(reservaCardView.inflate(R.layout.reservas_card_view, parent, false))
     }
 
+    // Numero de elementos de la lista
     override fun getItemCount(): Int = listaNombres.size
 
+    // Asocia los datos a cada CardView
     override fun onBindViewHolder(holder: ReservaViewHolder, position: Int) {
         holder.nombreReserva.text = listaNombres[position]
         holder.fechaReserva.text = listaFechas[position]
         holder.horaReserva.text = listaHoras[position]
         holder.imagen.setImageResource(imagenes[position])
 
+        // Click corto
         holder.card.setOnClickListener { onItemClick(position) }
 
+        // Click largo
         holder.card.setOnLongClickListener {
             onLongClick(position)
             true

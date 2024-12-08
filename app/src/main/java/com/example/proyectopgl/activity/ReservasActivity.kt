@@ -35,6 +35,7 @@ class ReservasActivity : AppCompatActivity() {
             insets
         }
 
+        // Configuracion de la toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
@@ -44,20 +45,24 @@ class ReservasActivity : AppCompatActivity() {
             finish()
         }
 
+        // Recibo los datos de las reservas
         listaNombres = intent.getStringArrayListExtra("NOMBRES")?.toMutableList() ?: mutableListOf()
         listaFechas = intent.getStringArrayListExtra("FECHAS")?.toMutableList() ?: mutableListOf()
         listaHoras = intent.getStringArrayListExtra("HORAS")?.toMutableList() ?: mutableListOf()
 
+        // Inicio la interfaz
         initUi()
 
     }
 
+    // Inicializa los componentes de la interfaz y los datos
     private fun initUi() {
         initDatos()
         initRecyclerView()
         actualizarRecyclerView()
     }
 
+    // Carga los datos y actualiza la lista
     private fun initDatos() {
         val reservas = ReservaRepository.getReservas()
         listaNombres.clear()
@@ -73,25 +78,28 @@ class ReservasActivity : AppCompatActivity() {
         }
     }
 
+    // Configuro el RecyclerView
     private fun initRecyclerView() {
         rcv = findViewById(R.id.listaRecyclerView)
         rcv.layoutManager = LinearLayoutManager(this)
 
         adapter = ReservasAdapter(
             listaNombres, listaFechas, listaHoras, listaImagenes,
-            onItemClick = { position -> mostrarPos(position) },
-            onLongClick = { position -> showContextMenuForItem(position) }
+            onItemClick = { position -> mostrarReserva(position) },
+            onLongClick = { position -> mostrarMenuContextual(position) }
         )
 
         rcv.adapter = adapter
 
     }
 
+    // Notificao al adapatador que los datos han sido modificados para que actualice la vista
     private fun actualizarRecyclerView() {
         adapter.notifyDataSetChanged()
     }
 
-    private fun mostrarPos(position: Int) {
+    // Muestra un mensaje con la informacion de la reserva
+    private fun mostrarReserva(position: Int) {
         Toast.makeText(
             this,
             getString(R.string.reserva, listaNombres[position], listaFechas[position], listaHoras[position]),
@@ -99,7 +107,8 @@ class ReservasActivity : AppCompatActivity() {
         ).show()
     }
 
-    private fun showContextMenuForItem(position: Int) {
+    // Muestra el menu contextual en la reserva seleccionada para poder eliminarla
+    private fun mostrarMenuContextual(position: Int) {
         val view = rcv.findViewHolderForAdapterPosition(position)?.itemView
         val menu = android.widget.PopupMenu(this, view)
         menu.menuInflater.inflate(R.menu.context_menu, menu.menu)
@@ -117,22 +126,21 @@ class ReservasActivity : AppCompatActivity() {
         menu.show()
     }
 
+    // Elimina la reserva y actualiza la lista
     private fun eliminarReserva(position: Int) {
         ReservaRepository.eliminarReserva(position)
-
         initDatos()
-
         adapter.notifyItemRemoved(position)
-
         Toast.makeText(this, "Cita eliminada", Toast.LENGTH_SHORT).show()
     }
 
-
+    // Creo el menu de opciones
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         menuInflater.inflate(R.menu.option_menu, menu)
         return true
     }
 
+    // Manejo de las opciones del menu
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return when (item.itemId) {
             R.id.mnOp1 -> {

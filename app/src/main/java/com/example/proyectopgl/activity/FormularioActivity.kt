@@ -23,6 +23,13 @@ class FormularioActivity : AppCompatActivity() {
 
     private var imagenBono: Int = 0
 
+    private val editTextNombre: EditText = findViewById(R.id.editTextNombre)
+    private val editTextApellidos: EditText = findViewById(R.id.editTextApellidos)
+    private val editTextCorreo: EditText = findViewById(R.id.editTextCorreo)
+    private val buttonFecha: Button = findViewById(R.id.buttonFecha)
+    private val buttonHora: Button = findViewById(R.id.buttonHora)
+    private val buttonConfirmar: Button = findViewById(R.id.buttonConfirmar)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
@@ -33,36 +40,30 @@ class FormularioActivity : AppCompatActivity() {
             insets
         }
 
+        // Recupero la imagen del bono desde la actividad anterior
         imagenBono = intent.getIntExtra("BONO_IMAGEN", 0)
 
+        // Configuracion de la toolbar
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
 
-        val editTextNombre: EditText = findViewById(R.id.editTextNombre)
-        val editTextApellidos: EditText = findViewById(R.id.editTextApellidos)
-        val editTextCorreo: EditText = findViewById(R.id.editTextCorreo)
-        val buttonFecha: Button = findViewById(R.id.buttonFecha)
-        val buttonHora: Button = findViewById(R.id.buttonHora)
-        val buttonConfirmar: Button = findViewById(R.id.buttonConfirmar)
-
-        fun esFechaHoraValida(fecha: String, hora: String): Boolean {
+        // Validacion de fecha y hora
+         fun esFechaHoraValida(fecha: String, hora: String): Boolean {
             val calendar = Calendar.getInstance()
-
             val fechaHoraStr = "$fecha $hora"
-
             val formato = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
             return try {
                 val fechaHora = formato.parse(fechaHoraStr)
-
                 fechaHora != null && fechaHora.after(calendar.time)
             } catch (e: Exception) {
                 false
             }
         }
 
+        // Configuro el boton de fecha
         buttonFecha.setOnClickListener {
             val calendar = Calendar.getInstance()
             val year = calendar.get(Calendar.YEAR)
@@ -75,6 +76,7 @@ class FormularioActivity : AppCompatActivity() {
             }, year, month, day).show()
         }
 
+        // Configuro el boton de hora
         buttonHora.setOnClickListener {
             val calendar = Calendar.getInstance()
             val hour = calendar.get(Calendar.HOUR_OF_DAY)
@@ -86,6 +88,7 @@ class FormularioActivity : AppCompatActivity() {
             }, hour, minute, true).show()
         }
 
+        // Configuro el boton de confirmar con todas las comprobaciones
         buttonConfirmar.setOnClickListener {
             val nombre = editTextNombre.text.toString().trim()
             val apellidos = editTextApellidos.text.toString().trim()
@@ -93,6 +96,7 @@ class FormularioActivity : AppCompatActivity() {
             val fecha = buttonFecha.text.toString()
             val hora = buttonHora.text.toString()
 
+            // Validaciones
             if (nombre.isEmpty() || apellidos.isEmpty() || correo.isEmpty() ||
                 fecha == getString(R.string.fecha) || hora == getString(R.string.hora)) {
                 Toast.makeText(this, R.string.campos_incompletos, Toast.LENGTH_SHORT).show()
@@ -111,10 +115,10 @@ class FormularioActivity : AppCompatActivity() {
             } else {
                 ReservaRepository.addReserva(Reserva(nombre, fecha, hora, imagenBono))
 
+                // Voy a la actividad de reservas
                 val intent = Intent(this, ReservasActivity::class.java)
                 startActivity(intent)
             }
         }
-
     }
 }
