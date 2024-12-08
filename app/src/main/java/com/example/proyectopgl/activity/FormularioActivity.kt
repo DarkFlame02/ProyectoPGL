@@ -23,12 +23,7 @@ class FormularioActivity : AppCompatActivity() {
 
     private var imagenBono: Int = 0
 
-    private val editTextNombre: EditText = findViewById(R.id.editTextNombre)
-    private val editTextApellidos: EditText = findViewById(R.id.editTextApellidos)
-    private val editTextCorreo: EditText = findViewById(R.id.editTextCorreo)
-    private val buttonFecha: Button = findViewById(R.id.buttonFecha)
-    private val buttonHora: Button = findViewById(R.id.buttonHora)
-    private val buttonConfirmar: Button = findViewById(R.id.buttonConfirmar)
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,6 +43,13 @@ class FormularioActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
         toolbar.setNavigationOnClickListener { finish() }
+
+        val editTextNombre: EditText = findViewById(R.id.editTextNombre)
+        val editTextApellidos: EditText = findViewById(R.id.editTextApellidos)
+        val editTextCorreo: EditText = findViewById(R.id.editTextCorreo)
+        val buttonFecha: Button = findViewById(R.id.buttonFecha)
+        val buttonHora: Button = findViewById(R.id.buttonHora)
+        val buttonConfirmar: Button = findViewById(R.id.buttonConfirmar)
 
         // Validacion de fecha y hora
          fun esFechaHoraValida(fecha: String, hora: String): Boolean {

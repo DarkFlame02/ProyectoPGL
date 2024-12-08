@@ -50,7 +50,7 @@ class MainActivity : AppCompatActivity() {
         val toolbar: Toolbar = findViewById(R.id.toolbar)
         setSupportActionBar(toolbar)
 
-        // Condfiguracion del menu lateral
+        // Configuracion del menu lateral
         navigationView = findViewById(R.id.navigation_view)
         navigationView.setNavigationItemSelectedListener { menuItem ->
             when (menuItem.itemId) {
